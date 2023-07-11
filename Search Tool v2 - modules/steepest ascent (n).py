@@ -3,12 +3,12 @@
 from problem import Numeric
 
 # 제일 좋은 것
-
+# problem/Convex.txt
 
 def main():
     # Create an instance of numerical optimization problem
     p = Numeric()
-    p.setVariable()
+    p.setVariables()
     # Call the search algorithm
     solution, value = steepestAscent(p)
     p.storeResult(solution, value)
@@ -23,13 +23,13 @@ def main():
 
 
 def steepestAscent(p):
-    p = Numeric()
+    # p = Numeric()
     current = p.randomInit()
     # current = randomInit(p) # 'current' is a list of values
     valueC = p.evaluate(current)
     # valueC = evaluate(current, p)
     while True:
-        neighbors = p.mutant(current)
+        neighbors = p.mutants(current)
         # neighbors = mutants(current, p)
         successor, valueS = bestOf(neighbors, p)
         if valueS >= valueC:
@@ -53,7 +53,7 @@ def steepestAscent(p):
 
 
 def bestOf(neighbors, p): ###
-    p = Numeric()
+    # p = Numeric()
     best = neighbors[0]
     bestValue = p.evaluate(best)
     # bestValue = evaluate(best, p)
@@ -67,7 +67,7 @@ def bestOf(neighbors, p): ###
     return best, bestValue
 
 def displaySetting(p):
-    p = Numeric()
+    # p = Numeric()
     print()
     print("Search algorithm: First-Choice Hill Climbing")
     print()

@@ -6,12 +6,12 @@ import math
 # 좋은 것
 # problem/Convex.txt
 
-
+LIMIT_STUCK = 100 # Max number of evaluations enduring no improvement
 
 def main():
     p = Numeric()
     # Create an instance of numerical optimization problem
-    p.setVariable()
+    p.setVariables()
     # p = createProblem()   # 'p': (expr, domain)
     # Call the search algorithm
     solution, minimum = firstChoice(p)
@@ -28,8 +28,8 @@ def firstChoice(p):
     valueC = p.evaluate(current)
     i = 0
     while i < LIMIT_STUCK:
-        successor = randomMutant(current, p)
-        valueS = evaluate(successor, p)
+        successor = p.randomMutant(current)
+        valueS = p.evaluate(successor)
         if valueS < valueC:
             current = successor
             valueC = valueS
@@ -50,7 +50,6 @@ def firstChoice(p):
 #     return mutate(current, i, d, p) # Return a random successor
 
 def displaySetting(p):
-    p = Numeric()
     print()
     print("Search algorithm: First-Choice Hill Climbing")
     print()
