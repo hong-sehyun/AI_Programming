@@ -280,10 +280,12 @@
 
 import math
 import random
+from Setup import Setup
 
 # interface
 class Problem:
     def __init__(self):
+        Setup.__init__(self)
         self._solution = []
         self._value = 0
         self._numEval = 0
@@ -320,10 +322,10 @@ class Numeric(Problem):
         Problem.__init__(self) ### important
         self._expression = ''
         self._domain = []
-        self._delta = 0.01
+        # self._delta = 0.01
 
-        self._alpha = 0.01
-        self._dx = 10 ** (-4)
+        # self._alpha = 0.01
+        # self._dx = 10 ** (-4)
 
     def getDelta(self):
         return self._delta
