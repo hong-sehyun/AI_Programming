@@ -10,7 +10,7 @@ def main():
     p = Numeric()
     p.setVariables()
     # Call the search algorithm
-    solution, value = gradientDescent(p)
+    solution, value = steepestAscent(p)
     p.storeResult(solution, value)
     # Show the problem and algorithm settings
     # describeProblem(p)
@@ -22,16 +22,16 @@ def main():
 
 
 
-def gradientDescent(p):
+def steepestAscent(p):
     # p = Numeric()
     current = p.randomInit()
     # current = randomInit(p) # 'current' is a list of values
     valueC = p.evaluate(current)
     # valueC = evaluate(current, p)
     while True:
-        successor = p.takeStep(current, valueC)
+        neighbors = p.mutants(current)
         # neighbors = mutants(current, p)
-        valueS = p.evaluate(successor)
+        successor, valueS = bestOf(neighbors, p)
         if valueS >= valueC:
             break
         else:
@@ -69,8 +69,8 @@ def bestOf(neighbors, p): ###
 def displaySetting(p):
     # p = Numeric()
     print()
-    print("Search algorithm: Gradient Descent Hill Climbing")
+    print("Search algorithm: First-Choice Hill Climbing")
     print()
-    print("Mutation step size:", p.getAlpha())
+    print("Mutation step size:", p.getDelta())  # p._delta 라고 변수에 직접적으로 접근하면 안됨
 
 main()
